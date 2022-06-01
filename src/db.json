@@ -23,5 +23,17 @@
         "name": "Gan256 Air SM",
         "imageUrl": "https://ae01.alicdn.com/kf/HTB1CSddXRxRMKJjy0Fdq6yifFXa6/Gan-356-Air-SM-3x3-Black-Magic-cube-GAN-Air-SM-Magnetic-3x3x3-Speed-cube-gans.jpg",
         "difficultyLevel": 5
+    },
+    {
+        "name": "test",
+        "description": "test test",
+        "imageUrl": "https://www.researchgate.net/profile/Marianna-Madry/publication/256662553/figure/fig6/AS:668627997061131@1536424745415/Solving-the-classic-Rubiks-Cube-implies-arranging-its-tiles-such-that-each-face-is.jpg",
+        "difficultyLevel": "3"
+    },
+    {
+        "name": "Classic",
+        "description": "Classic rubic cube",
+        "imageUrl": "https://www.researchgate.net/profile/Marianna-Madry/publication/256662553/figure/fig6/AS:668627997061131@1536424745415/Solving-the-classic-Rubiks-Cube-implies-arranging-its-tiles-such-that-each-face-is.jpg",
+        "difficultyLevel": "3"
     }
 ]
