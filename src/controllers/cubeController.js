@@ -26,6 +26,9 @@ router.post('/create', (req, res) => {
 });
 
 router.get('/details/:id', (req, res) => {
-        res.render('details');
-})
+        const cube = cubeService.getOne(req.params.id);
+
+        res.render('details', {cube});
+});
+
 module.exports = router;
