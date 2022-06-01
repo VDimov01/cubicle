@@ -8,7 +8,7 @@ exports.save = (cube) => {
     return fs.writeFile(path.resolve('src', 'db.json'), textData, {encoding: 'utf-8'})
 }
 
-exports.getOne = (cubeId) => cubes[cubeId];
+exports.getOne = (cubeId) => cubes.find(x => x.id === Number(cubeId)); 
 
 exports.getAll = (search = '', fromInput, toInput) => {
     const from = Number(fromInput) || 0;
