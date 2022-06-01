@@ -1,0 +1,26 @@
+{
+  "name": "cubicle",
+  "version": "1.0.0",
+  "description": "JS Backend Project",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon ./src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VDimov01/cubicle.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VDimov01/cubicle/issues"
+  },
+  "homepage": "https://github.com/VDimov01/cubicle#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  }
+}
