@@ -35,5 +35,11 @@
         "description": "Classic rubic cube",
         "imageUrl": "https://www.researchgate.net/profile/Marianna-Madry/publication/256662553/figure/fig6/AS:668627997061131@1536424745415/Solving-the-classic-Rubiks-Cube-implies-arranging-its-tiles-such-that-each-face-is.jpg",
         "difficultyLevel": "3"
+    },
+    {
+        "name": "New test",
+        "description": "dsadsadsa",
+        "imageUrl": "https://media.istockphoto.com/photos/rubiks-cube-on-a-white-background-picture-id473622680?k=20&m=473622680&s=612x612&w=0&h=-Mj7xwVTCIAVrifK_MmTG6GBgAnikYtxFwff7t8UO70=",
+        "difficultyLevel": "4"
     }
 ]
