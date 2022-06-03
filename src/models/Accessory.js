@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const accessorySchema = new mongoose.Schema({
-    
+
     name: {
         type: String,
         required: true,
@@ -9,10 +9,10 @@ const accessorySchema = new mongoose.Schema({
     imageUrl: {
         type: String,
         validate: {
-            validator: function() {
+            validator: function () {
                 return this.imageUrl.startsWith('http');
             },
-            message: 'ImageUrl should be link!' 
+            message: 'ImageUrl should be link!'
         },
         required: true
     },
@@ -20,11 +20,13 @@ const accessorySchema = new mongoose.Schema({
         type: String,
         required: true,
         maxlength: 120
-    }
-    // cubes: {
-    //     type: mongoose.Types.ObjectId,
-    //     ref: 'Cube'
-    // }
+    },
+    cubes: [
+        {
+            type: mongoose.Types.ObjectId,
+            ref: 'Cube'
+        }
+    ]
 });
 
 const Accessory = mongoose.model('Accessory', accessorySchema);
