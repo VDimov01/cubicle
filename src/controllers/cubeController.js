@@ -6,7 +6,7 @@ router.get('/create', (req, res) => {
         res.render('create');
 });
 
-router.post('/create', (req, res) => {
+router.post('/create', async (req, res) => {
         const cube = req.body;
         //Validate
         if (cube.name.length < 2) {
@@ -14,7 +14,7 @@ router.post('/create', (req, res) => {
         }
 
         //Save Data
-        cubeService.save(cube)
+        await cubeService.create(cube)
         .then(() => {
                 //Redirect to page
                 res.redirect('/');
@@ -25,9 +25,9 @@ router.post('/create', (req, res) => {
 
 });
 
-router.get('/details/:id', (req, res) => {
-        const cube = cubeService.getOne(req.params.id);
-
+router.get('/details/:id', async (req, res) => {
+        const cube = await cubeService.getOne(req.params.id).lean();
+        console.log(cube);
         res.render('details', {cube});
 });
 
