@@ -15,6 +15,7 @@ app.use(routes);
 initializeDatabase()
     .then(() => {
         app.listen(5000, () => console.log('App is listening on port 5000...'));
+        console.log('DB connected');
     })
     .catch((err) => {
         console.log('Cannot connect to DB: ', err);

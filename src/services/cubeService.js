@@ -2,6 +2,7 @@ const fs = require('fs/promises')
 const path = require('path');
 const {Cube} = require('../models/Cube');
 const cubes = require('../db.json');
+const { Accessory } = require('../models/Accessory');
 
 exports.create = (cube) => {
     return Cube.create(cube);
@@ -20,4 +21,17 @@ exports.getAll = async (search = '', fromInput, toInput) => {
     // .filter(x => (Number(x.difficultyLevel) >= from && Number(x.difficultyLevel) <= to))
 
     return cubes;
+};
+
+exports.attachAccessory = async (cubeId, accessoryId) => {
+    const cube = await Cube.findById(cubeId);
+    const accessory = await Accessory.findById(accessoryId);
+
+    cube.accessories.push(cube);
+    accessory.cubes.push(accessory);
+
+    await cube.save();
+    await accessory.save();
+
+    return cube;
 };
