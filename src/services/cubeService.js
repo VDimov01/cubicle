@@ -8,8 +8,8 @@ exports.create = (cube) => {
     return Cube.create(cube);
 }
 
-exports.getOne = (cubeId) => Cube.findById(cubeId); 
-
+exports.getOne = (cubeId) => Cube.findById(cubeId).populate('accessories'); 
+    
 exports.getAll = async (search = '', fromInput, toInput) => {
     let cubes = await Cube.find().lean();
     
@@ -27,8 +27,8 @@ exports.attachAccessory = async (cubeId, accessoryId) => {
     const cube = await Cube.findById(cubeId);
     const accessory = await Accessory.findById(accessoryId);
 
-    cube.accessories.push(cube);
-    accessory.cubes.push(accessory);
+    cube.accessories.push(accessory);
+    accessory.cubes.push(cube);
 
     await cube.save();
     await accessory.save();
