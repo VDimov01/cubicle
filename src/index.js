@@ -1,4 +1,5 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const app = express();
 const routes = require('./routes');
 const {initializeDatabase} = require('./config/database');
@@ -6,6 +7,8 @@ const {initializeDatabase} = require('./config/database');
 require('./config/handlebars')(app);
 
 app.use('/static', express.static('public'));
+
+// app.use(bodyParser.json());
 
 app.use(express.urlencoded({extended: false}));
 
