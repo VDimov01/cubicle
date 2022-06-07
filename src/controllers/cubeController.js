@@ -48,4 +48,6 @@ router.post('/:cubeId/attach', async (req, res) => {
         res.redirect(`/cube/details/${req.params.cubeId}`);
 });
 
+
+
 module.exports = router;

@@ -12,6 +12,7 @@ exports.getOne = (cubeId) => Cube.findById(cubeId);
 
 exports.getOneDetails = (cubeId) => Cube.findById(cubeId).populate('accessories');
 
+exports.getAllApi = () => Cube.find().lean();
     
 exports.getAll = async (search = '', fromInput, toInput) => {
     const from = Number(fromInput) || 0;
@@ -20,12 +21,13 @@ exports.getAll = async (search = '', fromInput, toInput) => {
     let cubes = await Cube.find({name: {$regex: new RegExp(search, 'i')}})
         .where('difficultyLevel').lte(to).gte(from)
         .lean();
-
+    
+        
     // const result = cubes
     // .filter(x => x.name.toLowerCase().includes(search.toLowerCase()))
     // .filter(x => (Number(x.difficultyLevel) >= from && Number(x.difficultyLevel) <= to))
 
-    return cubes;
+    return JSON.stringify(cubes);
 };
 
 exports.attachAccessory = async (cubeId, accessoryId) => {
