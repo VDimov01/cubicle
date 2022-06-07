@@ -8,7 +8,7 @@ require('./config/handlebars')(app);
 
 app.use('/static', express.static('public'));
 
-// app.use(bodyParser.json());
+app.use(bodyParser.json());
 
 app.use(express.urlencoded({extended: false}));
 
