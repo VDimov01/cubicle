@@ -8,6 +8,6 @@ const apiCubeController = require('./api/apiCubeController');
 router.use('/', homeController);
 router.use('/cube', cubeController);
 router.use('/accessory', accessoryController);
-router.use('/api/cubes', apiCubeController);
+router.use('/api', apiCubeController);
 
 module.exports = router;

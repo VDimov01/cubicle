@@ -12,7 +12,7 @@ exports.getOne = (cubeId) => Cube.findById(cubeId);
 
 exports.getOneDetails = (cubeId) => Cube.findById(cubeId).populate('accessories');
 
-exports.getAllApi = () => Cube.find().lean();
+exports.getAllApi = () => Cube.find();
     
 exports.getAll = async (search = '', fromInput, toInput) => {
     const from = Number(fromInput) || 0;
