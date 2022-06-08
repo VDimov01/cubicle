@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const cubeService = require('../services/cubeService');
 const fetch = require('node-fetch');
+const jwt = require('jsonwebtoken');
 
 router.get('/', async (req, res) => {
     // let {search, from, to} = req.query;
@@ -9,8 +10,22 @@ router.get('/', async (req, res) => {
 
     const response = await fetch('http://localhost:5000/api/cubes');
     const cubes = await response.json();
+
+    const token = req.cookies['jwt'];
+
+    if(token){
+        jwt.verify(token, 'secret', (err, decoded) => {
+            if(err){
+                res.status(401).send('Invalid token!');	
+            }
+
+            res.render('index', {cubes, username: decoded?.username});
+        });
+
+    }else{
+        res.render('index', {cubes});
+    }
     
-    res.render('index', {cubes});
 
 });
 

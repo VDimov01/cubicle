@@ -5,7 +5,12 @@ const cubeService = require('../services/cubeService');
 const accessoryService = require('../services/accessoryService');
 
 router.get('/create', (req, res) => {
-        res.render('create');
+        const token = req.cookies['jwt'];
+        if(token){
+           res.render('create');
+        }else{
+                res.send('You must be logged in to create a cube!');
+        }
 });
 
 router.post('/create', async (req, res) => {
