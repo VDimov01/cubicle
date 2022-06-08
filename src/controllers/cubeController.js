@@ -67,6 +67,22 @@ router.get('/:cubeId/attach', async (req, res) => {
         res.render('attachAccessory', {cube, accessories});
 });
 
+router.get('/:cubeId/delete', async (req, res) => {
+        const response = await fetch('http://localhost:5000/api/cubes/' + req.params.cubeId);
+        const cube = await response.json();
+
+        res.render('delete', {cube});
+});
+
+router.post('/:cubeId/delete', async (req, res) => {
+        const cubeId = req.params.cubeId;
+        await fetch('http://localhost:5000/api/cubes/delete/' + cubeId, {
+                method: 'DELETE'
+        });
+
+        res.redirect('/');
+});
+
 router.post('/:cubeId/attach', async (req, res) => {
         const accessoryId = req.body.accessory;
         
