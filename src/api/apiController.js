@@ -2,6 +2,7 @@ const router = require('express').Router();
 const path = require('path');
 const cubeService = require('../services/cubeService');
 const accessoryService = require('../services/accessoryService');
+const userService = require('../services/userService');
 
 
 router.get('/cubes', async (req, res) => {
@@ -30,6 +31,24 @@ router.get('/accessories/:id', async (req, res) => {
     res.send(accessories);
 });
 
+router.get('/users', async (req, res) => {
+    const users = await userService.getAll().lean();
+    res.send(users);
+})
+
+router.post('/users/register', async (req, res) => {
+    const user = req.body;
+    await userService.create(user);
+
+    res.send(user);
+});
+
+router.post('/users/login', async (req, res) => {
+    const {username, password} = req.body;
+    await userService.login(username, password);
+    res.redirect('/');
+});
+//-----------------------------------------post
 router.post('/accessories', async (req, res) => {
     const accessory = req.body;
     await accessoryService.create(accessory);
