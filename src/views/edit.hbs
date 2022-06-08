@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Delete Cube Page</title>
+    <title>Edit Cube Page</title>
     <link href="./css/site.css" type="text/css" rel="stylesheet">
     <link rel='shortcut icon' type='image/x-icon' href='./images/favicon.png' />
 </head>
@@ -11,17 +11,17 @@
 <body>
     <div class="container">
         <main>
-            <h1>Delete Cube</h1>
+            <h1>Edit Cube</h1>
             <div class="form">
                 <form method="POST">
                     <label for="name">Name</label>
-                    <input type="text" id="name" name="name" value="{{cube.name}}" disabled="true" />
+                    <input type="text" id="name" name="name" value="{{cube.name}}">
                     <label for="description">Description</label>
-                    <textarea id="description" name="description" disabled="true" />{{cube.description}}</textarea>
+                    <textarea id="description" name="description">{{cube.description}}</textarea>
                     <label for="image">ImageUrl</label>
-                    <input type="text" id="image" name="imageUrl" value="{{cube.imageUrl}}" disabled="true" />
+                    <input type="text" id="image" name="imageUrl" value="{{cube.imageUrl}}">
                     <label for="difficulty">Difficulty</label>
-                    <select id="difficulty" name="difficultyLevel" value="{{cube.difficultyLevel}}" disabled="true" />
+                    <select id="difficulty" name="difficultyLevel" value="{{cube.difficultyLevel}}">
                     <option value="1">1 - Very Easy</option>
                     <option value="2">2 - Easy</option>
                     <option value="3">3 - Medium (Standard 3x3)</option>
@@ -29,7 +29,7 @@
                     <option value="5">5 - Expert</option>
                     <option value="6">6 - Hardcore</option>
                     </select>
-                    <input type="submit" value="Delete">
+                    <input type="submit" value="Edit">
                 </form>
             </div>
         </main>

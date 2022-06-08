@@ -83,12 +83,34 @@ router.post('/:cubeId/delete', async (req, res) => {
         res.redirect('/');
 });
 
+router.get('/:cubeId/edit', async (req, res) => {
+        const response = await fetch('http://localhost:5000/api/cubes/' + req.params.cubeId);
+        const cube = await response.json();
+
+        res.render('edit', {cube});
+});
+
+router.post('/:cubeId/edit', async (req, res) => {
+        const cubeId = req.params.cubeId;
+        const cube = req.body;
+
+        await fetch('http://localhost:5000/api/cubes/edit/' + cubeId, {
+                method: 'PUT',
+                headers: {
+                        'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(cube)
+        })
+
+        res.redirect(`/cube/details/${cubeId}`);
+});
+
 router.post('/:cubeId/attach', async (req, res) => {
         const accessoryId = req.body.accessory;
         
         // await cubeService.attachAccessory(req.params.cubeId, accessoryId);
         // res.redirect(`/cube/details/${req.params.cubeId}`);
-        console.log(JSON.stringify(accessoryId));
+        //console.log(JSON.stringify(accessoryId));
 
         await fetch('http://localhost:5000/api/cubes/attach/' + req.params.cubeId, {
                 method: 'POST',

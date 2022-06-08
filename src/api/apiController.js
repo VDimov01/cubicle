@@ -82,4 +82,13 @@ router.delete('/cubes/delete/:cubeId', async (req, res) => {
     res.redirect('/');
 });
 
+router.put('/cubes/edit/:cubeId', async (req, res) => {
+    const cubeId = req.params.cubeId;
+    const cube = req.body;
+    
+    await cubeService.editOne(cubeId, cube);
+
+    res.redirect(`/cube/details/${cubeId}`);
+});
+
 module.exports = router;

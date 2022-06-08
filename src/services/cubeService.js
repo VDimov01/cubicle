@@ -41,3 +41,10 @@ exports.attachAccessory = async (cubeId, accessoryId) => {
 };
 
 exports.deleteOne = async (cubeId) => Cube.deleteOne({_id: cubeId});
+
+exports.editOne = async (cubeId, cube) => Cube.findByIdAndUpdate(cubeId, {$set: {
+    name: cube.name,
+    description: cube.description,
+    imageUrl: cube.imageUrl,
+    difficultyLevel: cube.difficultyLevel
+}});
