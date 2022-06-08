@@ -2,9 +2,12 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const routes = require('./routes');
+const cookieParser = require('cookie-parser');
 const {initializeDatabase} = require('./config/database');
 
 require('./config/handlebars')(app);
+
+app.use(cookieParser());
 
 app.use('/static', express.static('public'));
 

@@ -1,7 +1,4 @@
-const fs = require('fs/promises')
-const path = require('path');
 const {Cube} = require('../models/Cube');
-const cubes = require('../db.json');
 const { Accessory } = require('../models/Accessory');
 
 exports.create = (cube) => {

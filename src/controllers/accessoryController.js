@@ -4,7 +4,12 @@ const fetch = require('node-fetch');
 
 
 router.get('/create', (req, res) => {
-    res.render('createAccessory');
+    const token = req.cookies['jwt'];
+    if(token){
+        res.render('createAccessory');
+    }else{
+        res.send('You must be logged in to create an accessory!');
+    }
 });
 
 router.post('/create', async (req, res) => {
