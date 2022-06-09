@@ -76,11 +76,18 @@ router.get('/:cubeId/delete', async (req, res) => {
 
 router.post('/:cubeId/delete', async (req, res) => {
         const cubeId = req.params.cubeId;
-        await fetch('http://localhost:5000/api/cubes/delete/' + cubeId, {
-                method: 'DELETE'
-        });
+        const token = req.cookies['jwt'];
 
-        res.redirect('/');
+        if(token){
+                await fetch('http://localhost:5000/api/cubes/delete/' + cubeId, {
+                        method: 'DELETE'
+                });
+        
+                res.redirect('/');
+        }else{
+                res.send('You must be logged in to delete a cube!');
+        }
+       
 });
 
 router.get('/:cubeId/edit', async (req, res) => {
@@ -93,16 +100,22 @@ router.get('/:cubeId/edit', async (req, res) => {
 router.post('/:cubeId/edit', async (req, res) => {
         const cubeId = req.params.cubeId;
         const cube = req.body;
+        const token = req.cookies['jwt'];
 
-        await fetch('http://localhost:5000/api/cubes/edit/' + cubeId, {
-                method: 'PUT',
-                headers: {
-                        'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(cube)
-        })
-
-        res.redirect(`/cube/details/${cubeId}`);
+        if(token){
+                await fetch('http://localhost:5000/api/cubes/edit/' + cubeId, {
+                        method: 'PUT',
+                        headers: {
+                                'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(cube)
+                })
+        
+                res.redirect(`/cube/details/${cubeId}`);
+        }else{
+                res.send('You must be logged in to edit a cube!');
+        }
+      
 });
 
 router.post('/:cubeId/attach', async (req, res) => {
