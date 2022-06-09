@@ -36,6 +36,8 @@ router.get('/users', async (req, res) => {
     res.send(users);
 })
 
+//-----------------------------------------post
+
 router.post('/users/register', async (req, res) => {
     const user = req.body;
     await userService.create(user);
@@ -48,7 +50,7 @@ router.post('/users/login', async (req, res) => {
     await userService.login(username, password);
     res.redirect('/');
 });
-//-----------------------------------------post
+
 router.post('/accessories', async (req, res) => {
     const accessory = req.body;
     await accessoryService.create(accessory);
