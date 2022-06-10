@@ -31,6 +31,12 @@ router.post('/register', async (req, res) => {
         res.send('User already exists!');
         return;
     }else{
+
+        if(user.password != user.repeatPassword){
+            res.send('Passwords do not match!');
+            return;
+        }
+
         const hash = await bcrypt.hash(user.password, 10);
         user.password = hash;
 
@@ -43,7 +49,7 @@ router.post('/register', async (req, res) => {
     })
         .then(res => res.json())
         .then(user => {
-            console.log(user);
+            
         })
         .catch(err => {
             console.log(err);
