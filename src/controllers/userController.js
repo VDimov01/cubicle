@@ -2,6 +2,7 @@ const fetch = require('node-fetch');
 const router = require('express').Router();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const {secret, sessionName} = require('../constants');
 
 router.get('/register', (req, res) => {
     res.render('register');
@@ -12,9 +13,9 @@ router.get('/login', (req, res) => {
 });
 
 router.get('/logout', (req, res) => {
-    const token = req.cookies['jwt'];
+    const token = req.cookies[sessionName];
     if(token){
-        res.clearCookie('jwt');
+        res.clearCookie(sessionName);
         res.redirect('/');
     }else{
         res.send('You must be logged in to logout!');
@@ -68,11 +69,12 @@ router.post('/login', async (req, res) => {
     if(userExists){
         const match = await bcrypt.compare(user.password, userExists.password);
         if(match){
-            const token = jwt.sign({
-                username: user.username
-            }, 'secret', {expiresIn: '1h'});
+            let token = jwt.sign({
+                username: user.username,
+                _id: userExists._id
+            }, secret, {expiresIn: '1h'});
 
-            res.cookie('jwt', token, {httpOnly: true});
+            res.cookie(sessionName, token, {httpOnly: true});
             res.redirect('/');
             await fetch('http://localhost:5000/api/users/login', {
                 method: 'POST',
