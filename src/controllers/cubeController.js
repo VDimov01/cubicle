@@ -3,8 +3,10 @@ const path = require('path');
 const fetch = require('node-fetch');
 const cubeService = require('../services/cubeService');
 const accessoryService = require('../services/accessoryService');
+const {isAuth} = require('../middlewares/authMiddleware');
 
-router.get('/create', (req, res) => {
+
+router.get('/create',isAuth, (req, res) => {
         const token = req.cookies['jwt'];
         if(token){
            res.render('create');
@@ -13,8 +15,10 @@ router.get('/create', (req, res) => {
         }
 });
 
-router.post('/create', async (req, res) => {
+router.post('/create', isAuth, async (req, res) => {
         const cube = req.body;
+        cube.owner = req.user._id;
+        
         //Validate
         // console.log(req.body);
         if (cube.name.length < 2) {
@@ -50,10 +54,11 @@ router.get('/details/:id', async (req, res) => {
         const response = await fetch('http://localhost:5000/api/cubes/' + req.params.id + '/details');
         const cube = await response.json();
       
-        res.render('details', {cube});
+        const isOwner = cube.owner == req.user?._id;
+        res.render('details', {cube, isOwner});
 });
 
-router.get('/:cubeId/attach', async (req, res) => {
+router.get('/:cubeId/attach',isAuth, async (req, res) => {
         // const cube = await cubeService.getOne(req.params.cubeId).lean();
         // const accessories = await accessoryService.getAllAvailable(cube.accessories).lean();
         // res.render('attachAccessory', {cube, accessories});
@@ -67,7 +72,7 @@ router.get('/:cubeId/attach', async (req, res) => {
         res.render('attachAccessory', {cube, accessories});
 });
 
-router.get('/:cubeId/delete', async (req, res) => {
+router.get('/:cubeId/delete',isAuth, async (req, res) => {
         const response = await fetch('http://localhost:5000/api/cubes/' + req.params.cubeId);
         const cube = await response.json();
 
@@ -90,10 +95,15 @@ router.post('/:cubeId/delete', async (req, res) => {
        
 });
 
-router.get('/:cubeId/edit', async (req, res) => {
+router.get('/:cubeId/edit', isAuth, async (req, res) => {
         const response = await fetch('http://localhost:5000/api/cubes/' + req.params.cubeId);
         const cube = await response.json();
 
+        if(cube.owner != req.user._id){
+                return res.redirect('/404');
+        }
+
+        cube[`difficultyLevel${cube.difficultyLevel}`] = true;
         res.render('edit', {cube});
 });
 

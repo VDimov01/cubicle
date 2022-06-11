@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const routes = require('./routes');
+const {auth} = require('./middlewares/authMiddleware');
 const cookieParser = require('cookie-parser');
 const {initializeDatabase} = require('./config/database');
 
@@ -15,6 +16,7 @@ app.use(bodyParser.json());
 
 app.use(express.urlencoded({extended: false}));
 
+app.use(auth);  
 
 app.use(routes);
 
