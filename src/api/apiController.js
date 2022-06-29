@@ -75,7 +75,7 @@ router.post('/cubes/attach/:cubeId', async (req, res) => {
 
     res.redirect(`/cube/details/${req.params.cubeId}`);
 });
-
+//--------------------------------- delete
 router.delete('/cubes/delete/:cubeId', async (req, res) => {
     const cubeId = req.params.cubeId;
 
@@ -84,6 +84,7 @@ router.delete('/cubes/delete/:cubeId', async (req, res) => {
     res.redirect('/');
 });
 
+//----------------------------------- put
 router.put('/cubes/edit/:cubeId', async (req, res) => {
     const cubeId = req.params.cubeId;
     const cube = req.body;
